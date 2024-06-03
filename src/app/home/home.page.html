@@ -13,7 +13,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
+  <div id="container" class="cuerpo_page">
     <ion-card>
 
       <ion-card-title>
@@ -21,6 +21,17 @@
         <p>Usuario: {{ usuarioRecibido }}</p>
       </ion-card-title>
 
+      <!-- Colocamos la iimagen dentro de un ion-grid -->
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" class="ion-text-center">
+            <div class="animated-image-rotate">
+              <img class="logo" src="assets/user.png" alt="My Image" />
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    
       <!-- Creamos los campos para el home-->
       <ion-card-content>
 
@@ -46,7 +57,14 @@
       <ion-item>
         <ion-label>Fecha Nacimiento</ion-label>
         <ion-item>
-          <ion-input type="date" [(ngModel)]="selectedDate"></ion-input>
+          <!-- Componente de Angular Material -->
+          <mat-form-field>
+            <mat-label>Fecha Nacimiento</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker> 
+          </mat-form-field> 
+          <!--<ion-input type="date" [(ngModel)]="selectedDate"></ion-input>-->
         </ion-item>
       </ion-item>
 

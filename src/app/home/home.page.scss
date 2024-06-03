@@ -25,3 +25,37 @@
 #container a {
   text-decoration: none;
 }
+
+ion-card{
+  margin-top: 20%;
+}
+
+ion-card{
+  background-color: transparent;
+}
+
+.logo {
+  max-width: 50%;
+  height: auto;
+}
+
+/* Animacion por rotacion */
+.animated-image-rotate {
+  justify-content: center;
+  align-items: center;
+
+  img{
+    width: 150px;
+    height: 100px;
+    animation: rotate 5s linear infinite;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
