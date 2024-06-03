@@ -38,14 +38,15 @@ export class HomePage {
     await alert.present();
   }
 
-  mostrar() {
+  siguiente() {
     if (this.nombre.trim() === '' || this.apellido.trim() === '') {
       this.presentAlert('Error: nombre y apellido vacios');
     } else {
-      // Logica para manejar el envio del formulario cuando es valido
-      this.presentAlert('Su nombre es:' +this.nombre+' '+this.apellido);
+      // Redirige a la página 'product-list'
+      this.router.navigate(['/product-list']);
     }
   }
+
 
   limpiar() {
     this.nombre = '';
