@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Home
+      RackSNKRS
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -17,8 +17,7 @@
     <ion-card>
 
       <ion-card-title>
-        <h3>Informacion Adicional</h3>
-        <p>Usuario: {{ usuarioRecibido }}</p>
+        <h3>Crear Cuenta</h3>
       </ion-card-title>
 
       <!-- Colocamos la iimagen dentro de un ion-grid -->
@@ -43,6 +42,16 @@
       <ion-item>
         <ion-label position="floating">Apellido</ion-label>
         <ion-input type="text" [(ngModel)]="apellido"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Usuario</ion-label>
+        <ion-input type="text" [(ngModel)]="usuario"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" [(ngModel)]="password"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -72,7 +81,8 @@
 
         <!-- Creamos el boton -->
 
-        <ion-button (click)="limpiar()">Limpiar</ion-button>
+        <ion-button (click)="volver()">Volver</ion-button>
+        <ion-button (click)="guardar()">Guardar</ion-button>
         <ion-button (click)="siguiente()">Siguiente</ion-button>
 
     </ion-card>

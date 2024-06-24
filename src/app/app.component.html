@@ -1,3 +1,21 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu side="start" contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menú</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item routerLink="/product-list" (click)="closeMenu()">Productos</ion-item>
+        <ion-item routerLink="/home2" (click)="closeMenu()">Funcionalidades</ion-item>
+        <ion-item routerLink="/financial" (click)="closeMenu()">Financial</ion-item>
+        <ion-item routerLink="/camera" (click)="closeMenu()">Camara</ion-item>
+        <ion-item routerLink="/map" (click)="closeMenu()">Mapa</ion-item>
+        <ion-item (click)="logout()">Cerrar Sesión</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>

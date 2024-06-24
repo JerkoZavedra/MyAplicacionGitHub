@@ -35,6 +35,27 @@ const routes: Routes = [
     path: 'product-list',
     loadChildren: () => import('./product-list/product-list.module').then( m => m.ProductListPageModule)
   },
+  {
+    path: 'camera',
+    loadChildren: () => import('./camera/camera.module').then( m => m.CameraPageModule)
+  },
+  {
+    path: 'financial',
+    loadChildren: () => import('./financial/financial.module').then( m => m.FinancialPageModule)
+  },
+  {
+    path: 'map',
+    loadChildren: () => import('./map/map.module').then( m => m.MapPageModule)
+  },
+  {
+    path: 'home2',
+    loadChildren: () => import('./home2/home2.module').then( m => m.Home2PageModule)
+  },
+  {
+    path: '',
+    redirectTo: 'home2',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

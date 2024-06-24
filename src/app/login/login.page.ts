@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { DbserviceService } from '../dbservice.service';
+
 
 @Component({
   selector: 'app-login',
@@ -9,8 +11,9 @@ import { AlertController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-  usuario: string="";
+  usuario: any="";
   password: string="";
+  mensaje: string="";
 
   constructor(private alertController:AlertController, private router:Router) { }
 
@@ -26,7 +29,7 @@ export class LoginPage implements OnInit {
         }
 
       }
-      this.router.navigate(['/home'],NavigationExtras);
+      this.router.navigate(['/product-list'],NavigationExtras);
     }
     else{
       this.presentAlert('incorrecto');
@@ -41,6 +44,10 @@ export class LoginPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  ir() {
+    this.router.navigate(['/home']);
   }
 
 }

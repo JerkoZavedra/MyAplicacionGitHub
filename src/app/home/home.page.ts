@@ -1,32 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { DbserviceService } from '../dbservice.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  usuarioRecibido: string='';
-  passwordRecibido: string='';
-  nombre: string='';
-  apellido: string='';
-  selectedOption: string='';
-  selectedDate: string='';
+  nombre: any='';
+  apellido: any='';
+  usuario: any='';
+  password: any='';
+  selectedOption: any='';
+  selectedDate: any='';
 
-  constructor(private router:Router, private activateroute:ActivatedRoute, private alertController:AlertController) {
-    this.activateroute.queryParams.subscribe( params =>{
-      if(this.router.getCurrentNavigation()?.extras?.state){
+  isDBReady: boolean = false;
 
-        this.usuarioRecibido = this.router.getCurrentNavigation()?.extras?.state?.['usuarioEnviado'];
-        this.passwordRecibido = this.router.getCurrentNavigation()?.extras?.state?.['passwordEnviado'];
+  constructor(private router:Router,
+    private activateroute:ActivatedRoute, 
+    private alertController:AlertController,
+    private dbService: DbserviceService) { }
 
-        console.log();
-      }
-    })
-  }
+ngOnInit() {
+this.dbService.getIsDBReady().subscribe(isReady => {
+this.isDBReady = isReady;
+if (isReady) {
+// Aquí puedes llamar a funciones para cargar datos, etc. desde la base de datos
+}
+});
+}
 
   async presentAlert(message: string) {
     const alert = await this.alertController.create({
@@ -38,21 +43,36 @@ export class HomePage {
     await alert.present();
   }
 
+  guardar() {
+    if (this.nombre.trim() === '' || this.apellido.trim() === '') {
+      this.presentAlert('Error: nombre y apellido vacios');
+    } else {
+      this.guardarDatos();
+    }
+  }
+
+  guardarDatos() {
+    this.dbService.insertUsuario(this.nombre, this.apellido, this.usuario, this.password, this.selectedOption, this.selectedDate)
+      .then(() => {
+        this.presentAlert('Datos guardados exitosamente');
+        // Aquí puedes añadir lógica adicional, como mostrar un mensaje de éxito al usuario.
+      })
+      .catch(error => {
+        this.presentAlert('Error al guardar datos:'+ error);
+        // Aquí puedes manejar el error, por ejemplo, mostrar un mensaje de error al usuario.
+      });
+  }
+
+  volver() {
+    this.router.navigate(['/login']);
+  }
+
   siguiente() {
     if (this.nombre.trim() === '' || this.apellido.trim() === '') {
       this.presentAlert('Error: nombre y apellido vacios');
     } else {
-      // Redirige a la página 'product-list'
-      this.router.navigate(['/product-list']);
+    this.router.navigate(['/product-list'])
     }
-  }
-
-
-  limpiar() {
-    this.nombre = '';
-    this.apellido = '';
-    this.selectedOption = '';
-    this.selectedDate = '';
   }
 
 }
